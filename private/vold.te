@@ -429,16 +429,19 @@ neverallowxperm {
 neverallowxperm {
   domain
   -vold
+  recovery_only(`-recovery')
 } data_file_type:dir ioctl { FS_IOC_ADD_ENCRYPTION_KEY FS_IOC_REMOVE_ENCRYPTION_KEY FS_IOC_GET_ENCRYPTION_KEY_STATUS };
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -vold
     -vold_prepare_subdirs
 } vold_data_file:dir ~{ open create read getattr setattr search relabelfrom relabelto ioctl };
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -init
     -vold
     -vold_prepare_subdirs
@@ -446,6 +449,7 @@ neverallow {
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -apexd
     -init
     -vold
@@ -453,6 +457,7 @@ neverallow {
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -kernel
     -vold
     -vold_prepare_subdirs
@@ -460,6 +465,7 @@ neverallow {
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -apexd
     -init
     -vold
@@ -468,6 +474,7 @@ neverallow {
 
 neverallow {
     domain
+    recovery_only(`-recovery')
     -apexd
     -init
     -kernel

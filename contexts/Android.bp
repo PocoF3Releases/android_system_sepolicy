@@ -180,6 +180,7 @@ file_contexts {
 
 hwservice_contexts {
     name: "plat_hwservice_contexts",
+    recovery_available: true,
     defaults: ["contexts_flags_defaults"],
     srcs: [":hwservice_contexts_files{.plat_private}"],
 }
@@ -401,6 +402,7 @@ service_contexts {
 
 keystore2_key_contexts {
     name: "plat_keystore2_key_contexts",
+    recovery_available: true,
     defaults: ["contexts_flags_defaults"],
     srcs: [":keystore2_key_contexts_files{.plat_private}"],
 }

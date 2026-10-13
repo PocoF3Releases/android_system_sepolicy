@@ -918,3 +918,6 @@ neverallow {
     -init
     -statsd
 } statsd_atoms_list_version_prop:property_service set;
+
+# Recovery-only ephemeral key service controller.
+system_restricted_prop(ctl_recovery_storage_prop)

@@ -311,6 +311,7 @@
 /system/bin/credstore	u:object_r:credstore_exec:s0
 /system/bin/keystore	u:object_r:keystore_exec:s0
 /system/bin/keystore2	u:object_r:keystore_exec:s0
+/system/bin/hwservicemanager u:object_r:hwservicemanager_exec:s0
 /system/bin/fingerprintd u:object_r:fingerprintd_exec:s0
 /system/bin/gatekeeperd u:object_r:gatekeeperd_exec:s0
 /system/bin/crash_dump32 u:object_r:crash_dump_exec:s0
@@ -1002,3 +1003,6 @@
 #############################
 # For casefolding_remover
 /system/bin/casefolding_remover u:object_r:casefolding_remover_exec:s0
+
+# Recovery keeps key database snapshots in volatile memory only.
+/tmp/recovery-keystore(/.*)? u:object_r:recovery_keystore_file:s0

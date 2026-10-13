@@ -1964,3 +1964,11 @@ service.aiseal. u:object_r:aiseal_prop:s0
 
 # Wear dynamic thermal profile property
 thermal.dynamic_config_profile    u:object_r:thermal_profile_prop:s0 exact enum default setup kids_setup kids
+
+ctl.start$keystore2-recovery u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.stop$keystore2-recovery u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.start$recovery-qseecomd u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.stop$recovery-qseecomd u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.start$recovery-keymaster u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.stop$recovery-keymaster u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.start$hwservicemanager-recovery u:object_r:ctl_recovery_storage_prop:s0 exact string

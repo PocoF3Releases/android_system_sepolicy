@@ -290,3 +290,6 @@ type uid_allowlist_policy, file_type;
 
 # /sys/module/binder/parameters/impl
 type sysfs_binder_impl, fs_type, sysfs_type;
+
+# Ephemeral database copies used only by the recovery keystore service.
+type recovery_keystore_file, file_type;

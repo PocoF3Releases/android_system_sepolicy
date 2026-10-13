@@ -1615,6 +1615,7 @@ userdebug_or_eng(`
 # Platform must not have access to /mnt/vendor.
 neverallow {
   coredomain
+  recovery_only(`-recovery')
   -init
   -ueventd
   -vold
@@ -2278,6 +2279,7 @@ neverallow * { -domain }:binder *;
 # labeled system or vendor (/product and /vendor respectively).
 neverallow {
   domain
+  recovery_only(`-recovery')
   -dexopt_chroot_setup
   -init
   userdebug_or_eng(`-overlay_remounter')

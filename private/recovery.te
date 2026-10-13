@@ -3,6 +3,45 @@ typeattribute recovery coredomain;
 # The allow rules are only included in the recovery policy.
 # Otherwise recovery is only allowed the domain rules.
 recovery_only(`
+  # Native storage helper uses existing keys and ephemeral database snapshots.
+  binder_call(recovery, keystore)
+  allow recovery self:key { write search setattr };
+  allow recovery keystore_service:service_manager find;
+  allow recovery vold_key:keystore2_key {
+    get_info use manage_blob req_forced_op convert_storage_key_to_ephemeral
+  };
+  allow recovery locksettings_key:keystore2_key { get_info use };
+  allow recovery keystore_data_file:dir r_dir_perms;
+  allow recovery keystore_data_file:file r_file_perms;
+  allow recovery recovery_keystore_file:dir create_dir_perms;
+  allow recovery recovery_keystore_file:file create_file_perms;
+  allow keystore recovery_keystore_file:dir create_dir_perms;
+  allow keystore recovery_keystore_file:file create_file_perms;
+  set_prop(recovery, vold_prop)
+  set_prop(recovery, vold_status_prop)
+  allow recovery vold_metadata_file:dir r_dir_perms;
+  allow recovery vold_metadata_file:file r_file_perms;
+  neverallow recovery vold_metadata_file:dir ~r_dir_perms;
+  neverallow recovery vold_metadata_file:file ~r_file_perms;
+  r_dir_file(recovery, vold_data_file)
+  r_dir_file(recovery, unencrypted_data_file)
+  r_dir_file(recovery, system_data_file)
+  allow recovery system_userdir_file:dir { getattr search };
+  r_dir_file(recovery, media_rw_data_file)
+  allow recovery system_data_root_file:dir { r_dir_perms mounton };
+  allowxperm recovery system_data_root_file:dir ioctl {
+    FS_IOC_ADD_ENCRYPTION_KEY FS_IOC_GET_ENCRYPTION_KEY_STATUS
+  };
+  allowxperm recovery media_rw_data_file:dir ioctl {
+    FS_IOC_GET_ENCRYPTION_POLICY_EX FS_IOC_GET_ENCRYPTION_KEY_STATUS
+  };
+  neverallow recovery vold_data_file:dir ~r_dir_perms;
+  neverallow recovery vold_data_file:file ~r_file_perms;
+  neverallowxperm recovery data_file_type:dir ioctl FS_IOC_REMOVE_ENCRYPTION_KEY;
+  allow recovery tmpfs:dir relabelfrom;
+  allow recovery recovery_keystore_file:dir relabelto;
+  set_prop(recovery, ctl_recovery_storage_prop)
+
   # Reboot the device
   set_prop(recovery, powerctl_prop)
 
