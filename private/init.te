@@ -19,6 +19,11 @@ recovery_only(`
   domain_trans(init, rootfs, recovery)
   domain_trans(init, rootfs, linkerconfig)
   domain_trans(init, rootfs, servicemanager)
+  # Native recovery crypto services execute from the ramdisk rootfs.
+  domain_trans(init, rootfs, hwservicemanager)
+  domain_trans(init, rootfs, keystore)
+  # Read recovery VINTF fragment directories and ramdisk service configuration.
+  allow { hwservicemanager keystore } rootfs:dir r_dir_perms;
   domain_trans(init, rootfs, snapuserd)
 ')
 domain_trans(init, shell_exec, shell)

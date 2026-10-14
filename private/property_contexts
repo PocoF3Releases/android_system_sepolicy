@@ -1972,3 +1972,6 @@ ctl.stop$recovery-qseecomd u:object_r:ctl_recovery_storage_prop:s0 exact string
 ctl.start$recovery-keymaster u:object_r:ctl_recovery_storage_prop:s0 exact string
 ctl.stop$recovery-keymaster u:object_r:ctl_recovery_storage_prop:s0 exact string
 ctl.start$hwservicemanager-recovery u:object_r:ctl_recovery_storage_prop:s0 exact string
+
+ctl.start$recovery-gatekeeper u:object_r:ctl_recovery_storage_prop:s0 exact string
+ctl.stop$recovery-gatekeeper u:object_r:ctl_recovery_storage_prop:s0 exact string

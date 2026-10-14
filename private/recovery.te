@@ -3,8 +3,17 @@ typeattribute recovery coredomain;
 # The allow rules are only included in the recovery policy.
 # Otherwise recovery is only allowed the domain rules.
 recovery_only(`
+  # Vendor crypto HALs load the ramdisk dynamic linker and shared libraries.
+  r_dir_file({ tee hal_keymaster_server hal_gatekeeper_server }, rootfs)
+  allow { tee hal_keymaster_server hal_gatekeeper_server } rootfs:file execute;
+
   # Native storage helper uses existing keys and ephemeral database snapshots.
   binder_call(recovery, keystore)
+  # Binderized verification only; passthrough HAL attributes grant data writes.
+  typeattribute recovery hal_gatekeeper_client;
+  hwbinder_use(recovery)
+  allow recovery authorization_service:service_manager find;
+  allow recovery keystore:keystore2 add_auth;
   allow recovery self:key { write search setattr };
   allow recovery keystore_service:service_manager find;
   allow recovery vold_key:keystore2_key {
